@@ -1,0 +1,10 @@
+breast_cancer: sklearn
+credit: InfiAgent Github
+house_prices: Kaggle
+titanic: Kaggle
+wine: sklearn
+abalone: InfiAgent Github
+baseball: InfiAgent Github
+autompg: InfiAgent Github
+simulated_healthcare: Kaggle
+iris: Kaggle
