@@ -1,0 +1,12 @@
+Dataset ID,Unformatted Answer
+361111,0.711
+361286,The test AUROC of the best model (Lasso) is 0.724.
+361070,The test AUROC of the best model (XGBoost) is 0.718.
+361278,The test AUROC of the best model (XGBoost) is 0.798.
+361093,The test RMSE of the best model (XGBoost) for predicting `Log_exposure` is 0.078.
+361094,The test RMSE of the best model (Random Forest) is 0.134.
+361288,2.140
+361072,The test RMSE of the best model (XGBoost) is 2.270.
+361076,0.597
+361279,The test RMSE of the best model (Random Forest) is 0.027.
+361280,2.152

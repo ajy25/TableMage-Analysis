@@ -14,13 +14,14 @@ tm.use_agents()
 
 # set model name
 model_name = "gpt4o"
+tools_only = True
 
 # set subset of datasets to generate answers for (must have already ran on all datasets)
 # leave empty to generate answers for all datasets
 subset = []
 
 
-iternums = list(range(10))
+iternums = list(range(1, 2))
 
 
 if model_name == "llama3.1_8b":
@@ -35,7 +36,7 @@ elif model_name == "llama3.3_70b":
         llm_type="groq", model_name="llama-3.3-70b-versatile", temperature=0.1
     )
     output_dir = curr_dir / "results" / "tablemage_llama3.3_70b"
-    delay = 4
+    delay = 5
 
 elif model_name == "gpt4o":
     tm.agents.options.set_llm(
@@ -50,6 +51,10 @@ elif model_name == "gpt4o_mini":
     )
     output_dir = curr_dir / "results" / "tablemage_gpt4o_mini"
     delay = 2
+
+
+if tools_only:
+    output_dir = Path(str(output_dir) + "-tools_only")
 
 output_dir.mkdir(exist_ok=True, parents=True)
 
@@ -92,19 +97,31 @@ for iternum in iternums:
         dataset_df = pd.read_csv(
             curr_dir / "datasets" / (dataset_name_to_filestem[dataset_name])
         )
+
+        if tools_only:
+            system_prompt = """\
+You are a helpful assistant. \
+You have access to tools for data analysis. \
+Use your tools to help the user analyze the dataset. \
+Round answers to 3 decimal places.\
+"""
+        else:
+            system_prompt = """\
+You are a helpful assistant. \
+You have access to tools for data analysis. \
+Use your tools to help the user analyze the dataset. \
+If you need to transform data, use your (non-Python) tools to do so. \
+Round answers to 3 decimal places.\
+"""
+
         agent = tm.agents.ChatDA(
             df=dataset_df,
             test_size=0.2,
             split_seed=42,
             tool_rag=True,
-            tool_rag_top_k=5,
-            system_prompt="""\
-You are a helpful assistant. \
-You have access to tools for data analysis. \
-Use your tools to help the user analyze the dataset. \
-If you need to transform data, use your (non-Python) tools to do so. \
-Round answers to 3 decimal places. \
-    """,
+            tool_rag_top_k=20,
+            tools_only=tools_only,
+            system_prompt=system_prompt,
         )
 
         for i in range(1, n_questions + 1):

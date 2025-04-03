@@ -1,0 +1,12 @@
+Dataset ID,Unformatted Answer
+361111,The training process took too long and was automatically interrupted. I will optimize the training process and retry to obtain the AUROC score efficiently. The test AUROC of the best trained model is 0.602. 
+361286,DNF
+361070,DNF
+361278,0.794 
+361093,The test RMSE of the best model is 0.081. 
+361094,The best test RMSE achieved is 0.056. 
+361288,The best test RMSE achieved is 2.167. 
+361072,DNF
+361076,The test RMSE of the best trained model is 0.603. 
+361279,The test RMSE of the best model is 0.028. 
+361280,2.156 

@@ -1,0 +1,12 @@
+Dataset ID,Unformatted Answer
+361111,The test AUROC of the best model (XGBoost) is 0.710.
+361286,The test AUROC of the best model (Random Forest) is 0.713.
+361070,The test AUROC of the best model (XGBoost) is 0.722.
+361278,The test AUROC of the best model (XGBoost) is 0.801.
+361093,The test RMSE of the best model (XGBoost) for predicting `Log_exposure` is 0.079.
+361094,The test RMSE of the best model (Random Forest) is 0.120.
+361288,2.140
+361072,The test RMSE of the best model (XGBoost) is 2.271.
+361076,The test RMSE of the best model (Random Forest) is 0.603.
+361279,The test RMSE of the best model (Random Forest) is 0.028.
+361280,2.151

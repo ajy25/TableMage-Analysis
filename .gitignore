@@ -3,3 +3,5 @@ benchmarking/ml/api_key.txt
 set_api_key.py
 
 
+ignore/*
+logs

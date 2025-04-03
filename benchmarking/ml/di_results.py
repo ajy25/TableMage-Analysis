@@ -15,38 +15,42 @@ subdir_stems_to_consider = [
 ]
 
 
+iternums = list(range(10))
+
+
 curr_dir = Path(__file__).resolve().parent
-output_dir = curr_dir / "results" / "di_gpt4o"
+output_dir = curr_dir / "results" / "di_gpt4o" / "orig"
 output_dir.mkdir(exist_ok=True)
 datasets_dir = curr_dir / "datasets"
 subdirs = sorted([x for x in datasets_dir.iterdir() if x.is_dir()])
 subdirs = [x for x in subdirs if x.stem in subdir_stems_to_consider]
 
 
-for subdir in subdirs:
-    if subdir.stem.split("_")[0] == "regression":
-        metric = "RMSE"
-        task = "regression"
-    elif subdir.stem.split("_")[0] == "classification":
-        metric = "AUROC"
-        task = "classification"
-    else:
-        raise RuntimeError("Unknown dataset type")
-    output_path = output_dir / f"{subdir.stem}_performances.csv"
-    results_dict = {
-        "file_name": [],
-        "unformatted_answer": [],
-    }
+for iternum in iternums:
+    for subdir in subdirs:
+        if subdir.stem.split("_")[0] == "regression":
+            metric = "RMSE"
+            task = "regression"
+        elif subdir.stem.split("_")[0] == "classification":
+            metric = "AUROC"
+            task = "classification"
+        else:
+            raise RuntimeError("Unknown dataset type")
+        output_path = output_dir / f"{subdir.stem}-performances_{iternum}.csv"
+        results_dict = {
+            "file_name": [],
+            "unformatted_answer": [],
+        }
 
-    for file in sorted(list(subdir.iterdir())):
-        file_path = file
+        for file in sorted(list(subdir.iterdir())):
+            file_path = file
 
-        df = pd.read_csv(file_path)
-        target = df.columns[0]
+            df = pd.read_csv(file_path)
+            target = df.columns[0]
 
-        prompt = """\
+            prompt = """\
 The dataset is at {file_path}.
-You must perform a 60/40 train/test split using sklearn’s train_test_split function, with random seed 42.
+You must perform a 70/30 train/test split using sklearn’s train_test_split function, with random seed 42.
 
 Predict the variable `{target}` with machine learning {task}. \
 Please train the best possible model to accomplish this task. \
@@ -54,22 +58,22 @@ Report the test {metric} of the best possible model you can train. \
 Only report the test {metric} value, rounded to 3 decimal points.
 """
 
-        async def main():
-            mi = DataInterpreter()
-            result = await mi.run(
-                prompt.format(
-                    file_path=file_path,
-                    target=target,
-                    task=task,
-                    metric=metric,
+            async def main():
+                mi = DataInterpreter()
+                result = await mi.run(
+                    prompt.format(
+                        file_path=file_path,
+                        target=target,
+                        task=task,
+                        metric=metric,
+                    )
                 )
-            )
-            return str(result)
+                return str(result)
 
-        output = fire.Fire(main)
+            output = fire.Fire(main)
 
-        results_dict["file_name"].append(file.stem)
-        results_dict["unformatted_answer"].append(output)
+            results_dict["file_name"].append(file.stem)
+            results_dict["unformatted_answer"].append(output)
 
-    results_df = pd.DataFrame(results_dict)
-    results_df.to_csv(output_path, index=False)
+        results_df = pd.DataFrame(results_dict)
+        results_df.to_csv(output_path, index=False)

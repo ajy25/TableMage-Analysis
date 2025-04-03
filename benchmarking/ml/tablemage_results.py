@@ -12,10 +12,10 @@ import tablemage as tm
 
 tm.use_agents()
 
-print("TableMage loaded.")
 
+model_name = "gpt4o"
+tools_only = False
 
-model_name = "llama3.3_70b"
 
 subdir_stems_to_consider = [  # optionally comment out any of these
     "classification_mixed",
@@ -23,6 +23,9 @@ subdir_stems_to_consider = [  # optionally comment out any of these
     "regression_mixed",
     "regression_numerical",
 ]
+
+
+iternums = list(range(8, 10))
 
 
 if model_name == "llama3.1_8b":
@@ -38,80 +41,85 @@ elif model_name == "llama3.3_70b":
     output_dir = curr_dir / "results" / "tablemage_llama3.3_70b"
 
 elif model_name == "gpt4o":
-    tm.agents.options.set_llm(llm_type="openai", model_name="gpt-4o", temperature=0.1)
+    tm.agents.options.set_llm(
+        llm_type="openai", model_name="gpt-4o-2024-08-06", temperature=0.1
+    )
     output_dir = curr_dir / "results" / "tablemage_gpt4o"
 
 elif model_name == "gpt4o_mini":
     tm.agents.options.set_llm(
-        llm_type="openai", model_name="gpt-4o-mini", temperature=0.1
+        llm_type="openai", model_name="gpt-4o-mini-2024-07-18", temperature=0.1
     )
     output_dir = curr_dir / "results" / "tablemage_gpt4o_mini"
 
-
-output_dir.mkdir(exist_ok=True)
+if tools_only:
+    output_dir = Path(str(output_dir) + "_tools_only")
+output_dir = output_dir / "orig"
+output_dir.mkdir(exist_ok=True, parents=True)
 datasets_dir = curr_dir / "datasets"
 subdirs = sorted([x for x in datasets_dir.iterdir() if x.is_dir()])
 subdirs = [x for x in subdirs if x.stem in subdir_stems_to_consider]
 
 
-for subdir in subdirs:
-    print(f"Generating answers for {subdir.stem} dataset using TableMage...")
+for iternum in iternums:
+    for subdir in subdirs:
+        print(f"Generating answers for {subdir.stem} dataset using TableMage...")
 
-    if subdir.stem.split("_")[0] == "regression":
-        metric = "RMSE"
-        task = "regression"
-    elif subdir.stem.split("_")[0] == "classification":
-        metric = "AUROC"
-        task = "classification"
-    else:
-        raise RuntimeError("Unknown dataset type")
+        if subdir.stem.split("_")[0] == "regression":
+            metric = "RMSE"
+            task = "regression"
+        elif subdir.stem.split("_")[0] == "classification":
+            metric = "AUROC"
+            task = "classification"
+        else:
+            raise RuntimeError("Unknown dataset type")
 
-    output_path = output_dir / f"{subdir.stem}_performances.csv"
+        output_path = output_dir / f"{subdir.stem}-performances_{iternum}.csv"
 
-    results_dict = {
-        "file_name": [],
-        "unformatted_answer": [],
-    }
+        results_dict = {
+            "file_name": [],
+            "unformatted_answer": [],
+        }
 
-    for file in sorted(list(subdir.iterdir())):
-        df = pd.read_csv(file)
+        for file in sorted(list(subdir.iterdir())):
+            df = pd.read_csv(file)
 
-        print(df.shape)
+            print(df.shape)
 
-        target = df.columns[0]
+            target = df.columns[0]
 
-        agent = tm.agents.ChatDA(
-            df=df,
-            test_size=0.4,
-            split_seed=42,
-            tool_rag_top_k=5,
-            react=False,
-            tools_only=True,
-            system_prompt="""\
+            agent = tm.agents.ChatDA(
+                df=df,
+                test_size=0.3,
+                split_seed=42,
+                tool_rag_top_k=5,
+                react=False,
+                tools_only=tools_only,
+                system_prompt="""\
 You are a helpful assistant. \
 You have access to tools for training and evaluating machine learning models. \
 Use your tools to help the user train the best possible model for the given dataset. \
 """,
-        )
+            )
 
-        response = agent.chat(
-            f"Predict the variable `{target}` with machine learning {task}. "
-            "Please train the best possible model to accomplish this task. "
-            f"Report the test {metric} of the best possible model you can train. "
-            f"Only report the test {metric} value, rounded to 3 decimal points."
-        )
-        print(
-            "\n\n"
-            + "-" * 80
-            + "\n"
-            + f"TableMage's answer for {file.stem}:\n{response}"
-            + "\n"
-            + "-" * 80
-            + "\n\n"
-        )
+            response = agent.chat(
+                f"Predict the variable `{target}` with machine learning {task}. "
+                "Please train the best possible model to accomplish this task. "
+                f"Report the test {metric} of the best possible model you can train. "
+                f"Only report the test {metric} value, rounded to 3 decimal points."
+            )
+            print(
+                "\n\n"
+                + "-" * 80
+                + "\n"
+                + f"TableMage's answer for {file.stem}:\n{response}"
+                + "\n"
+                + "-" * 80
+                + "\n\n"
+            )
 
-        results_dict["file_name"].append(file.stem)
-        results_dict["unformatted_answer"].append(response)
+            results_dict["file_name"].append(file.stem)
+            results_dict["unformatted_answer"].append(response)
 
-    results_df = pd.DataFrame(results_dict)
-    results_df.to_csv(output_path, index=False)
+        results_df = pd.DataFrame(results_dict)
+        results_df.to_csv(output_path, index=False)

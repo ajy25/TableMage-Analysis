@@ -1,0 +1,5 @@
+file_name,unformatted_answer
+361072_cpu_act,The test RMSE of the best model (XGBoost) is 2.267.
+361076_wine_quality,The test RMSE of the best model (XGBoost) is 0.597.
+361279_yprop_4_1,The test RMSE of the best model (Random Forest) is 0.027.
+361280_abalone,2.151

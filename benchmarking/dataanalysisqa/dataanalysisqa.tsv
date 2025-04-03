@@ -23,7 +23,7 @@ Question ID	Dataset	Question Order	Question	Category	Output Keywords
 22	House Prices	12	Regress "SalePrice" on "TotalSF", "GarageYrBlt", and "GarageArea" with linear regression. Report the train R-squared and the test RMSE.	Regression Analysis; Persistence	r2; rmse
 23	Wine	1	Compute the mean and standard deviation for "alcohol".	Summary Statistics	mean; std
 24	Wine	2	Compute the mean and standard deviation for "malic_acid".	Summary Statistics	mean; std
-25	Wine	3	What is the skew and kurthosis of "alcohol"?	Summary Statistics	skew; kurtosis
+25	Wine	3	What is the skew and kurtosis of "alcohol"?	Summary Statistics	skew; kurtosis
 26	Wine	4	Compute the correlation between "alcohol" and "malic_acid". 	Summary Statistics	corr
 27	Wine	5	Fit a logistic regression model to predict "wine_class" from "alcohol", "malic_acid", and "flavanoids". Report the test one-vs-one AUROC.	Regression Analysis	auroc
 28	Wine	6	Engineer a new variable, "meaningless", that is defined as ("proline" - "alcohol" * "malic_acid"). Find its median.	Data Transformation; Summary Statistics	median

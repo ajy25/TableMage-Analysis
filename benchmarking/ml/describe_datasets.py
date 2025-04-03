@@ -26,6 +26,7 @@ output = {
     "target": [],
     "n_features": [],
     "n_examples": [],
+    "subdir": [],
 }
 
 
@@ -46,6 +47,7 @@ for subdir in subdirs:
         output["target"].append(target)
         output["n_features"].append(n_features)
         output["n_examples"].append(n_examples)
+        output["subdir"].append(subdir.stem)
 
 
 results_df = pd.DataFrame(output)

@@ -1,0 +1,12 @@
+Dataset ID,Unformatted Answer
+361111,The best test AUROC achieved is 0.710. 
+361286,The test AUROC of the best trained model is 0.698. 
+361070,DNF
+361278,It looks like the model training took too long and was automatically interrupted. I will optimize the process by selecting fewer models or tuning their parameters for faster execution while maintaining accuracy. Let me retry with a more efficient approach. The model training is still taking too long. I will use a simplified approach with only a Logistic Regression model to ensure a quick result. Let me retry. The test AUROC of the best model (Logistic Regression) is 0.783. 
+361093,The test RMSE of the best model is 0.086. 
+361094,The best test RMSE achieved is 0.057. 
+361288,2.184 
+361072,2.486 
+361076,0.603
+361279,The test RMSE of the best model is 0.028. 
+361280,The test RMSE of the best trained model is 2.195. 

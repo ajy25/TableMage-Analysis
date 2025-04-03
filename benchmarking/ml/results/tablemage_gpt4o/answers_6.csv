@@ -1,0 +1,12 @@
+Dataset ID,Unformatted Answer
+361111,The test AUROC of the best model (XGBoost) is 0.693.
+361286,The test AUROC of the best model (Logistic Regression) is 0.720.
+361070,The test AUROC of the best model (XGBoost) is 0.711.
+361278,The test AUROC of the best model (XGBoost) is 0.796.
+361093,The test RMSE of the best possible model (XGBoost) is 0.077.
+361094,The test RMSE of the best model (Random Forest) is 0.120.
+361288,2.147
+361072,The test RMSE of the best model (Random Forest) is 3.716.
+361076,0.604
+361279,0.028
+361280,2.155

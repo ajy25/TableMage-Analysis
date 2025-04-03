@@ -1,0 +1,12 @@
+Dataset ID,Unformatted Answer
+361111,DNF
+361286,The best test AUROC is 0.722. 
+361070,The test AUROC of the best model is 0.696. 
+361278,The test AUROC of the best possible model trained is 0.790. 
+361093,The test RMSE of the best model is 0.080. 
+361094,0.056 
+361288,2.167 
+361072,The best test RMSE achieved is 2.486. 
+361076,The test RMSE of the best model is 0.605. 
+361279,The test RMSE of the best model is 0.028. 
+361280,The test RMSE of the best trained model is 2.195. 

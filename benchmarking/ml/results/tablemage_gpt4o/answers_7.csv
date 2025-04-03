@@ -1,0 +1,12 @@
+Dataset ID,Unformatted Answer
+361111,The test AUROC of the best model (XGBoost) is 0.691.
+361286,The test AUROC of the best model (XGBoost) is 0.722.
+361070,The test AUROC of the best model (XGBoost) is 0.722.
+361278,The test AUROC of the best model (XGBoost) is 0.799.
+361093,0.078
+361094,The test RMSE of the best model (Random Forest) is 0.120.
+361288,2.147
+361072,The test RMSE of the best model (XGBoost) is 2.302.
+361076,The test RMSE of the best model (XGBoost) is 0.598.
+361279,The test RMSE of the best model (Random Forest) is 0.028.
+361280,2.152

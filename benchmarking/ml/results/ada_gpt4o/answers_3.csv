@@ -1,0 +1,12 @@
+Dataset ID,Unformatted Answer
+361111,"The training process took too long, causing an automatic interruption. I’ll optimize the approach to ensure efficient model training while still achieving high AUROC. Let me retry with a more efficient selection of models. The training process was again interrupted due to time constraints. I will further optimize by focusing on a single efficient model. Let me retry with a streamlined approach. The best test AUROC achieved is 0.710. "
+361286,The test AUROC of the best model trained is 0.659. 
+361070,The test AUROC of the best trained model is 0.707. 
+361278,The test AUROC of the best trained model is 0.794. 
+361093,The test RMSE of the best model is 0.086. 
+361094,The test RMSE of the best trained model is 0.057. 
+361288,The test RMSE of the best model is 2.184. 
+361072,DNF
+361076,The test RMSE of the best possible model trained is 0.605. 
+361279,The best test RMSE achieved is 0.028. 
+361280,2.156 

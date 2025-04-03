@@ -1,0 +1,12 @@
+Dataset ID,Unformatted Answer
+361111,The test AUROC of the best model (XGBoost) is 0.696.
+361286,The test AUROC of the best model (ElasticNet) is 0.725.
+361070,0.716
+361278,The test AUROC of the best model (XGBoost) is 0.796.
+361093,The test RMSE of the best model (XGBoost) is 0.077.
+361094,The test RMSE of the best model (Random Forest) is 0.120.
+361288,2.150
+361072,The test RMSE of the best model (XGBoost) is 2.288.
+361076,The test RMSE of the best model (XGBoost) is 0.601.
+361279,The test RMSE of the best model (Random Forest) is 0.027.
+361280,2.157

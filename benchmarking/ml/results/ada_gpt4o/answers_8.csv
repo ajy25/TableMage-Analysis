@@ -1,0 +1,12 @@
+Dataset ID,Unformatted Answer
+361111,The test AUROC of the best model is 0.718. 
+361286,The best test AUROC achieved is 0.722. 
+361070,The training process took too long to complete. I’ll optimize the model selection and hyperparameters to ensure the best possible performance within a reasonable time. Let me retry and provide the AUROC score. The test AUROC of the best possible model trained is 0.594. 
+361278,DNF
+361093,0.086 
+361094,The test RMSE of the best trained model is 0.056. 
+361288,The test RMSE of the best model is 2.167. 
+361072,DNF
+361076,The test RMSE of the best model is 0.603. 
+361279,The best test RMSE achieved is 0.028. 
+361280,The test RMSE of the best model is 2.156. 
